@@ -14,7 +14,7 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'elixir-lang/vim-elixir'
 Plug 'scrooloose/nerdtree'
 Plug 'mhinz/vim-grepper'
-Plug 'rking/ag.vim'
+"Plug 'rking/ag.vim'
 Plug 'tpope/vim-repeat'
 Plug 'airblade/vim-gitgutter'
 "Plug 'ElmCast/elm-vim'
@@ -22,10 +22,18 @@ Plug 'airblade/vim-gitgutter'
 Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
 Plug 'sbdchd/neoformat'
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
-Plug 'w0rp/ale'
+Plug 'dense-analysis/ale'
+"Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'leafgarland/typescript-vim'
+"Plug 'HerringtonDarkholme/yats.vim'
 "Plug 'Quramy/tsuquyomi'
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
+Plug 'mattn/emmet-vim'
+Plug 'maxbane/vim-asm_ca65'
+Plug 'jdonaldson/vaxe'
+Plug 'Shougo/ddc.vim'
+Plug 'vim-denops/denops.vim'
+Plug 'github/copilot.vim', { 'branch': 'release' }
 
 " Color themes
 Plug 'morhetz/gruvbox'
@@ -59,6 +67,8 @@ let g:airline_powerline_fonts = 1
 
 let g:ale_linters = {
 \  'javascript': ['eslint'],
+\  'typescript': ['tsserver', 'eslint'],
+\  'typescriptreact': ['tsserver', 'eslint'],
 \}
 
 let g:ale_fixers = {
@@ -66,3 +76,17 @@ let g:ale_fixers = {
 \   'typescript': ['prettier'],
 \   'css': ['prettier'],
 \}
+
+let g:ale_c_clang_options="-I/home/david/Repositories/SNES/pvsneslib/pvsneslib/include"
+let g:ale_cpp_clang_options="-I/home/david/Repositories/SNES/pvsneslib/pvsneslib/include"
+
+filetype plugin indent on
+augroup filetypedetect
+    au BufNewFile,BufRead *.s,*.inc set ft=asm_ca65
+augroup END
+
+map <Leader>t :ALEGoToDefinition -tab<CR>
+map <Leader>s :ALEGoToDefinition -vsplit<CR>
+map <Leader>p :ALEFix prettier<CR>
+map <Leader>r :ALERename<CR>
+map <Leader>f :ALEFindReferences<CR>
